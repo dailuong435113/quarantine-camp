@@ -36,7 +36,7 @@
                                     //   echo $row['fname'];
                                     $comorbidity = $_GET['comorbidity'];
                                     foreach ($comorbidity as $comorbidity){ 
-                                        $sql = "INSERT INTO `patient.comorbidity`(`patient_id`, `comorbidity`) VALUES ('".$row['patient_id']."','".$comorbidity."');";
+                                        $sql = "INSERT INTO `patient_comorbidity`(`patient_id`, `comorbidity`) VALUES ('".$row['patient_id']."','".$comorbidity."');";
                                         if (mysqli_query($conn, $sql)){
                                             //Thông báo nếu thành công
                                             echo 'Thêm thành công';
@@ -52,7 +52,7 @@
                                     
                                     $symptom = $_GET['symptom'];
                                     foreach ($symptom as $symptom){ 
-                                    $sql = "INSERT INTO `patient.symtom`(`patient_id`, `symtom`, `date_symptom`) VALUES ('".$row['patient_id']."','".$symptom."','".$date."');";
+                                    $sql = "INSERT INTO `patient_symtom`(`patient_id`, `symtom`, `date_symptom`) VALUES ('".$row['patient_id']."','".$symptom."','".$date."');";
                                     if (mysqli_query($conn, $sql)){
                                         //Thông báo nếu thành công
                                         echo 'Thêm thành công';
@@ -67,7 +67,7 @@
 
                                     
                                     if($comorbidities_other !=""){
-                                        $sql = "INSERT INTO `patient.comorbidity`(`patient_id`, `comorbidity`) VALUES ('".$row['patient_id']."','".$comorbidities_other."');";
+                                        $sql = "INSERT INTO `patient_comorbidity`(`patient_id`, `comorbidity`) VALUES ('".$row['patient_id']."','".$comorbidities_other."');";
                                         if (mysqli_query($conn, $sql)){
                                             //Thông báo nếu thành công
                                             echo 'Thêm thành công';
@@ -81,7 +81,7 @@
                                     }
 
                                     if($symptoms_other !=""){
-                                        $sql = "INSERT INTO `patient.symtom`(`patient_id`, `symtom`, `date_symptom`) VALUES ('".$row['patient_id']."','".$symptoms_other."','".$date."');";
+                                        $sql = "INSERT INTO `patient_symtom`(`patient_id`, `symtom`, `date_symptom`) VALUES ('".$row['patient_id']."','".$symptoms_other."','".$date."');";
                                         if (mysqli_query($conn, $sql)){
                                             //Thông báo nếu thành công
                                             echo 'Thêm thành công';

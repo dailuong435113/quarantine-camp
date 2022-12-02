@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #007A64;
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sign-text {
+  line-height: 1.5rem;
+}
+
+.sign-text-warn {
+  line-height: 1.5rem;
+  color: rgba(255, 0, 0, 0.723);
+}
+
+.trigger {
+  background: #10213e;
+  color: #fff;
+  font-size: 22px;
+  padding: 10px 20px;
+}
+
+.sign-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* opacity: 0;
+  visibility: hidden; */
+}
+
+.sign-overlay:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sign-container {
+  position: relative;
+  width: 50%;
+  min-height: 400px;
+  display: flex;
+}
+
+/* .close {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  font-size: 30px;
+  color: #d3e42d;
+  font-weight: bold;
+  transition: all 200ms;
+} */
+
+.sign-form {
+  width: 50%;
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.details {
+  background: #007A64;
+}
+
+.details #sign-title {
+  color: #10213e;
+}
+
+.signin, .signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sinput {
+  background: #eee;
+  border: none;
+  padding: 12px 15px;
+  border: 2px;
+  margin: 8px 0px;
+  width: 100%;
+  font-family: inherit;
+  color: #0d3e6a;
+  font-size: inherit;
+}
+
+.sinput:focus {
+  outline-color: #0d3e6a;
+}
+
+a {
+  color: #10213e;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 15px 0;
+}
+
+.form-submit {
+  background: #10213e;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  padding: 12px 45px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
+}
+
+.form-submit:hover {
+  background: #071835;
+  transform: scale(1.1);
+}
+
+.signup .form-submit {
+  margin-top: 15px;
+}
+
+#signin, #signup {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: #10213e;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#sign-ques {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.content {
+  background: #10213e;
+  color: #fff;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .sign-container{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .sign-container{
+    width: 80%;
+    flex-direction: column-reverse;
+  }
+
+  .sign-form {
+    width: 100%;
+  }
+
+  .close {
+    top: 0;
+    right: 10px;
+    margin: 0;
+  }
+}

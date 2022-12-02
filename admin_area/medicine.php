@@ -4,7 +4,7 @@ session_start();
 
 include("includes/db.php");
 include("includes/header.php");
-
+include("includes/check.php");
 ?>
 <body>
 
@@ -97,33 +97,33 @@ include("includes/header.php");
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form action = "add_medice.php" method = "GET">
 									<div class="form-group">
-										<label class="text-black font-w500">Medicine ID</label>
-										<input type="number" class="form-control">
+										<label class="text-black font-w500">ATC</label>
+										<input type="text" class="form-control" name ="atc">
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">Medicine Name</label>
-										<input type="text" class="form-control">
+										<input type="text" class="form-control" name = "name_medice">
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">Expiration Date</label>
-										<input type="date" class="form-control">
+										<input type="date" class="form-control" name = "expiration_date">
 									</div>
 									<div class="form-group">
-										<label class="text-black font-w500">Expiration Month</label>
-										<input type="date" class="form-control">
+										<label class="text-black font-w500">Price</label>
+										<input type="number" class="form-control" name = "price">
 									</div>
 									<div class="form-group">
-										<label class="text-black font-w500">Expiration Year</label>
-										<input type="date" class="form-control">
+										<label class="text-black font-w500">Effect</label>
+										<input type="text" class="form-control" name = "effect">
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="text-black font-w500">Uses</label>
 										<input type="text" class="form-control">
-									</div>
+									</div> -->
 									<div class="form-group">
-										<button type="button" class="btn btn-primary">CREATE</button>
+										<button type="submit" name = "add_medice" class="btn btn-primary">CREATE</button>
 									</div>
 								</form>
 							</div>
@@ -142,12 +142,19 @@ include("includes/header.php");
 												<label class="custom-control-label" for="checkAll"></label>
 											</div>
 										</th>
-										<th>Medicine ID</th>
+										<th>ATC</th>
 										<th>Medicine Name</th>
 										<th>Expiration Date</th>
-										<th>Uses</th>
+										<th>Effect</th>
 									</tr>
 								</thead>
+								<?php
+								$sql_medicine = "SELECT medicine.medicine_id, medicine.medicine_name, medicine.price, medicine.expiration_date, medicine_effect.effect FROM medicine INNER JOIN medicine_effect ON medicine.medicine_id = medicine_effect.medicine_id"; 
+								$result_medicine = mysqli_query($conn, $sql_medicine);
+								if (mysqli_num_rows($result_medicine) > 0) {
+										while($row_medicine = mysqli_fetch_assoc($result_medicine)) {
+										
+								?>
 								<tbody>
 									<tr>
 										<td>
@@ -159,10 +166,10 @@ include("includes/header.php");
 										<!-- <td>
 											<img src="images/users/11.png" alt="" width="43">
 										</td> -->
-										<td><span class="text-nowrap">#B-00001</span></td>
-										<td><span class="text-nowrap">#P-00017</span></td>
-										<td>26/02/2020, 03:41 AM</td>
-										<td><span class="text-nowrap">Treatment for minor sprains and bruising</span></td>
+										<td><span class="text-nowrap"><?php echo "#ATC-". $row_medicine['medicine_id']; ?></span></td>
+										<td><span class="text-nowrap"><?php echo $row_medicine['medicine_name']; ?></span></td>
+										<td><?php echo $row_medicine['expiration_date']; ?></td>
+										<td><span class="text-nowrap"><?php echo $row_medicine['effect']; ?></span></td>
 										<!-- <td>
 											<a href="javascript:void(0)" class="btn btn-primary text-nowrap btn-sm light">5 Appointment</a>
 										</td> -->
@@ -185,43 +192,10 @@ include("includes/header.php");
 											</div>
 										</td>												
 									</tr>
-									<tr>
-										<td>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="customCheckBox3" required="">
-												<label class="custom-control-label" for="customCheckBox3"></label>
-											</div>
-										</td>
-										<!-- <td>
-											<img src="images/users/12.png" alt="" width="43">
-										</td> -->
-										<td><span class="text-nowrap">#B-00002</span></td>
-										<td><span class="text-nowrap">#P-0007</span></td>
-										<td>16/02/2020, 02:42 AM</td>
-										<td><span class="text-nowrap">Treatment of mild-to-moderate COVID-19</span></td>
-										<!-- <td>
-											<a href="javascript:void(0)" class="btn btn-primary text-nowrap btn-sm light">2 Appointment</a>
-										</td> -->
-										<!-- <td><span class="text-nowrap">+12 4124 5125</span></td> -->
-										<!-- <td><span class="text-primary">Available</span></td> -->
-										<td>
-											<div class="dropdown ml-auto text-right">
-												<div class="btn-link" data-toggle="dropdown">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z" stroke="#2E2E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-														<path d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z" stroke="#2E2E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-														<path d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z" stroke="#2E2E2E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="#">View Detail</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												</div>
-											</div>
-										</td>												
-									</tr>
 								</tbody>
+								<?php }
+									}
+									?>
 							</table>
 						</div>
 					</div>

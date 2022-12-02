@@ -31046,3 +31046,29 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
       color: #fff; }
 
 /*# sourceMappingURL=style.css.map */
+
+.blockcolor{
+  position: relative;
+  text-decoration: none;
+  font-family: 'Poppins',sans-serif;
+  color: #a0a0a0;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  padding: 0 10px;
+}
+.blockcolor:after{
+  content: "";
+  position: absolute;
+  background-color: #007A64;
+  height: 3px;
+  width: 0;
+  left: 0;
+  bottom: -10px;
+  transition: 0.3s;
+}
+.blockcolor:hover{
+  color: #007A64;
+}
+.blockcolor:hover:after{
+  width: 100%;
+}

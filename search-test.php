@@ -81,8 +81,8 @@ include("includes/header.php");
         ***********************************-->
         <!-- <br><br><br> -->
    <div class="container-search">
-      <form action="">
-         <i class="fas fa-search"></i>
+      <form action="" id="searchbar">
+         <i class="fas fa-search" ></i>
          <input type="text" placeholder="Enter your phone number">
          <button type="submit">Search</button>
       </form>
@@ -90,6 +90,7 @@ include("includes/header.php");
     <!-- <br><br><br><br> -->
 
     <div class="coronata">
+    <form action="">
          <div class="container1">
          <div class="title">
                <h1>Vietnam Health Declaration</h1>
@@ -610,10 +611,13 @@ include("includes/header.php");
                <div class="text-center"> <button class="btn-submit" type="submit">Submit</button> </div>
                <br>
                <div class="text-center"> <button class="btn-submit" type="submit">Print</button> </div>
+               </from>
          </div>
          
          </div>
-      </div>
+            
+   </div>
+   
       <!-- end coronata -->
 
 <!-- Script -->

@@ -1,3 +1,5 @@
+<body onload="window.print();">
+<div id="page" class="page">
 <?php
 
 session_start();
@@ -40,7 +42,7 @@ if(isset($_GET['people_id'])){
         ***********************************-->
 		<?php
 
-		include("includes/navhead.php");
+		// include("includes/navhead.php");
 
 		?>
 		<!--**********************************
@@ -60,7 +62,7 @@ if(isset($_GET['people_id'])){
         ***********************************-->
 		<?php
 
-		include("includes/main.php");
+		// include("includes/main.php");
 
 		?>
 		<!--**********************************
@@ -72,7 +74,7 @@ if(isset($_GET['people_id'])){
         ***********************************-->
 		<?php
 
-		include("includes/sidebar.php");
+		// include("includes/sidebar.php");
 
 		?>
 		<!--**********************************
@@ -619,15 +621,8 @@ if(isset($_GET['people_id'])){
 							</div>
 						</div>
 					</div>
-					<?php
-					if (isset($_GET['discharge_from_hospital'])) {
-					?>
-						<hr class="mb-4">
-						<a href="report.php?people_id=<?php echo $patient_id ?>"><button class="btn btn-primary btn-lg btn-block" type="submit">Discharge from hospital </button></a>
-					<?php
-					}
-					?>
-							
+							<hr class="mb-4">
+							<a href="print.php?people_id=<?php echo $patient_id ?>"><button class="btn btn-primary btn-lg btn-block" type="submit">Print </button></a>
 				</div>
 			</div>
 		</div>

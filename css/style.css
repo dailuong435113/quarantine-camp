@@ -1360,7 +1360,7 @@ table{
     justify-content: center;
 }
 
-form {
+#searchbar {
     background: #fff;
     width: 600px;
     height: 55px;
@@ -1368,13 +1368,13 @@ form {
     outline:auto;
 }
 
-form input {
+#searchbar input {
     flex: 1;
     border: none;
     outline: none;
 }
 
-form button {
+#searchbar button {
     background: #007A64;
     padding: 10px 50px;
     border: none;
@@ -1384,7 +1384,7 @@ form button {
     cursor: pointer;
 }
 
-form .fa-search {
+#searchbar .fa-search {
     align-self: center;
     padding: 10px 20px;
     color: #777;

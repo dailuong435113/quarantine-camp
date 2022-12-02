@@ -17,7 +17,7 @@
 							<span class="nav-text">Patients</span>
 						</a>
                         <ul aria-expanded="false">
-							<li><a href="table-datatable-basic.php">Patients List</a></li>
+							<li><a href="table-datatable-basic.php?status=all">Patients List</a></li>
 							<li><a href="patient-details.php">Patient Details</a></li>
                             <li><a href="ecom-checkout.php">Export Patients</a></li>
 							<li><a href="assign.php">Assigned Patients</a></li>
@@ -35,11 +35,15 @@
 						</ul>
                     </li>
 					<li>
-                        <a href="bed-manage.php" class="ai-icon" aria-expanded="false">
+                        <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-381-pencil"></i>
-							<span class="nav-text">Bed Management</span>
+							<span class="nav-text">Place Management</span>
 						</a>
-					</li>
+                        <ul aria-expanded="false">
+							<li><a href="bed-manage.php">Bed</a></li>
+							<li><a href="building.php?building=all">Building</a></li>
+						</ul>
+                    </li>
 					<li>
                         <a href="medicine.php" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-search-1"></i>
@@ -52,11 +56,11 @@
 							<span class="nav-text">Test Result</span>
 						</a>
 					</li>
-                    <li><a href="reviews.php" class="ai-icon" aria-expanded="false">
+                    <!-- <li><a href="reviews.php" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-381-notepad"></i>
 							<span class="nav-text">Reviews</span>
 						</a>
-					</li>
+					</li> -->
                 </ul>
 				
 				<!-- <div class="copyright">

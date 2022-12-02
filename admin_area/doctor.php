@@ -92,34 +92,54 @@ include("includes/header.php");
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title">Add Contact</h5>
+								<h5 class="modal-title">Add employee</h5>
 								<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
+								<form action="add_doctor.php" method="GET">
 									<div class="form-group">
-										<label class="text-black font-w500">Doctor Name</label>
-										<input type="text" class="form-control">
+										<label class="text-black font-w500">Employee Name</label>
+										<input type="first_name" class="form-control" name="fname" placeholder="First name"><br>
+										<input type="last_name" class="form-control" name="lname" placeholder="Last name">
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="text-black font-w500">Doctor ID</label>
 										<input type="text" class="form-control">
+									</div> -->
+									<div class="form-group">
+									<label class="text-black font-w500">Gender</label>
+										<select name="gender" class="form-control">
+											<option value="">--select--</option>
+											<option value="Male" >Male</option>
+											<option value="Female">Female</option>
+										</select>
 									</div>
 									<div class="form-group">
-										<label class="text-black font-w500">Specialist</label>
-										<input type="text" class="form-control">
+									<label class="text-black font-w500">Job type</label>
+										<select name="job_type" class="form-control">
+											<option value="">--select--</option>
+											<option value="Doctor" >Doctor</option>
+											<option value="Nurse">Nurse</option>
+											<option value="Staff" >Staff</option>
+											<option value="Volunteer">Volunteer</option>
+											<option value="Manager">Manager</option>
+										</select>
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">Contact (Phone Number)</label>
-										<input type="number" class="form-control">
+										<input type="number" name="contact" class="form-control">
 									</div>
 									<div class="form-group">
+										<label class="text-black font-w500">Address</label>
+										<input type="address" name = "address" class="form-control">
+									</div>
+									<!-- <div class="form-group">
 										<label class="text-black font-w500">Date Check In</label>
 										<input type="date" class="form-control">
-									</div>
+									</div> -->
 									<div class="form-group">
-										<button type="button" class="btn btn-primary">CREATE</button>
+										<button type="submit" class="btn btn-primary">CREATE</button>
 									</div>
 								</form>
 							</div>

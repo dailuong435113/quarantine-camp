@@ -756,4 +756,3 @@ include("check.php");
 		});
 	</script>
 </body>
-<.php>

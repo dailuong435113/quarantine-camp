@@ -5,6 +5,13 @@ session_start();
 include("includes/db.php");
 include("includes/header.php");
 include("check.php");
+if(isset($_GET['patient_id']) || isset($_GET['prescription'])){
+    $patient_id=$_GET['patient_id'];
+    $sql_id = "SELECT * FROM patient WHERE patient_id = ".$patient_id; 
+                        $result_id = mysqli_query($conn, $sql_id);
+                        if (mysqli_num_rows($result_id) > 0) {
+                                while($row_id = mysqli_fetch_assoc($result_id)) {
+
 ?>
 
 <body>
@@ -96,26 +103,31 @@ include("check.php");
                                     
                                     <div class="col-lg-8 order-lg-1">
                                         <h4 class="mb-3">Patient Information</h4>
-                                        <form class="needs-validation" novalidate="" action="./js/check.js">
-                                            <table>
+                                        
+                                                <?php
+                                                if (isset($_GET['prescription'])) {
+                                                    ?>
+                                                    <form class="needs-validation" novalidate="" action="add_prescription.php?".<?php echo $_GET['patient_id']?> method = "get">
+                                                    <table>
+                                                    
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label for="firstName">First name</label>
-                                                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                                                        <input type="text" class="form-control" id="firstName" text = "" name = "fname" placeholder="" value="<?php echo $row_id['fname'];?>" required="" readonly >
                                                         <!-- <div class="invalid-feedback">
                                                             Valid first name is required.
                                                         </div> -->
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="lastName">Last name</label>
-                                                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                                                        <input type="text" class="form-control" id="lastName" name = "lname" placeholder="" value="<?php echo $row_id['lname'];?>" required="" readonly >
                                                         <!-- <div class="invalid-feedback">
                                                             Valid last name is required.
                                                         </div> -->
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label for="lastName">Contact</label>
-                                                        <input type="number" class="form-control" id="contact" placeholder="" value="" required="">
+                                                        <input type="number" class="form-control" id="contact" placeholder="" name = "contact" value="<?php echo $row_id['phone'];?>" required="" readonly >
                                                         <!-- <div class="invalid-feedback">
                                                             Valid phone number is required.
                                                         </div> -->
@@ -124,7 +136,7 @@ include("check.php");
 
                                                 <div class="mb-3">
                                                     <label for="address">Address</label>
-                                                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                                                    <input type="text" class="form-control" id="address" name = "address" placeholder="1234 Main St" value = "<?php echo $row_id['address'];?>" required="" readonly >
                                                     <!-- <div class="invalid-feedback">
                                                         Please enter your address.
                                                     </div> -->
@@ -134,19 +146,132 @@ include("check.php");
                                                 <div class="row">
                                                     <div class="col-md-5 mb-3">
                                                         <label for="country">Gender</label>
-                                                        <select class="d-block w-100 default-select" id="gender" required="">
-                                                            <option value="">Choose...</option>
-                                                            <option>Male</option>
-                                                            <option>Female</option>
+                                                        
+                                                        <?php 
+                                                        switch ($row_id['gender']) {
+                                                            case 'Male':
+                                                        ?>
+                                                        <select class="d-block w-100 default-select" id="gender" name = "gender" required="" readonly >
+                                                            <option selected >Male</option>
                                                         </select>
+                                                        <?php
+                                                                break;
+                                                                case 'Female':
+                                                        ?>
+                                                        <select class="d-block w-100 default-select" id="gender" name = "gender" required="" readonly >
+                                                                    <option selected>Female</option>
+                                                        </select>
+                                                       
+                                                        <?php
+                                                                break;        
+                                                            default:
+                                                                # code...
+                                                                break;
+                                                        }
+                                                            ?>
                                                         <!-- <div class="invalid-feedback">
                                                             Please select a valid country.
                                                         </div> -->
                                                     </div>
                                                 </div>
+                                                </div>
+                                                <div class="form-group">
+                                                <label class="text-black font-w500" require>Medicine: </label><br>
+                                                To select multiple, hold down the Ctrl key and select
+                                                <select class="form-control" name="medicine[]" size="10" multiple="multiple">
+                                                <?php
+                                                $sql_medicine = "SELECT * FROM medicine"; 
+                                                $result_medicine = mysqli_query($conn, $sql_medicine);
+                                                if (mysqli_num_rows($result_medicine) > 0) {
+                                                        while($row_medicine = mysqli_fetch_assoc($result_medicine)) {
+                                                            ?>
+                                                            <option value="<?php echo $row_medicine['medicine_id'];?>" ><?php echo "#ATC-".$row_medicine['medicine_id']." ".$row_medicine['medicine_name']; ?></option> 
+                                                            <?php echo $row_medicine['medicine_id']." ".$row_medicine['medicine_name'];
+                                                        }
+                                                }
+                                                ?>
+                                                </select><br>
+                                                </div>
+                                                <?php
+                                                }else {
+                                                    ?>
+                                                    <form class="needs-validation" novalidate="" action="fix_patient.php?".<?php echo $_GET['patient_id']?> method = "get">
+<table>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="firstName">First name</label>
+                                                        <input type="text" class="form-control" id="firstName" text = "" name = "fname" placeholder="" value="<?php echo $row_id['fname'];?>" required="" >
+                                                        <!-- <div class="invalid-feedback">
+                                                            Valid first name is required.
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="lastName">Last name</label>
+                                                        <input type="text" class="form-control" id="lastName" name = "lname" placeholder="" value="<?php echo $row_id['lname'];?>" required="">
+                                                        <!-- <div class="invalid-feedback">
+                                                            Valid last name is required.
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="lastName">Contact</label>
+                                                        <input type="number" class="form-control" id="contact" placeholder="" name = "contact" value="<?php echo $row_id['phone'];?>" required="">
+                                                        <!-- <div class="invalid-feedback">
+                                                            Valid phone number is required.
+                                                        </div> -->
+                                                    </div>
+                                                </div>
 
+                                                <div class="mb-3">
+                                                    <label for="address">Address</label>
+                                                    <input type="text" class="form-control" id="address" name = "address" placeholder="1234 Main St" value = "<?php echo $row_id['address'];?>" required="">
+                                                    <!-- <div class="invalid-feedback">
+                                                        Please enter your address.
+                                                    </div> -->
+                                                </div>
+
+                                                <!-- Gender -->
+                                                <div class="row">
+                                                    <div class="col-md-5 mb-3">
+                                                        <label for="country">Gender</label>
+                                                        
+                                                        <?php 
+                                                        switch ($row_id['gender']) {
+                                                            case 'Male':
+                                                        ?>
+                                                        <select class="d-block w-100 default-select" id="gender" name = "gender" required="">
+                                                            <option value="">Choose...</option>
+                                                            <option selected >Male</option>
+                                                            <option>Female</option>
+                                                        </select>
+                                                        <?php
+                                                                break;
+                                                                case 'Female':
+                                                        ?>
+                                                        <select class="d-block w-100 default-select" id="gender" name = "gender" required="">
+                                                                    <option value="">Choose...</option>
+                                                                    <option>Male</option>
+                                                                    <option selected>Female</option>
+                                                        </select>
+                                                       
+                                                        <?php
+                                                                break;        
+                                                            default:
+                                                                # code...
+                                                                break;
+                                                        }
+                                                            ?>
+                                                        <!-- <div class="invalid-feedback">
+                                                            Please select a valid country.
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <?php    
+                                                }
+                                                ?>
+
+                                                
                                                 <!-- Symptoms -->
-                                                <hr class="mb-4">
+                                                <!-- <hr class="mb-4">
                                                     <div>
                                                         <h4 class="mb-3">Symptoms</h4>
                                                         <div class="custom-control custom-checkbox mb-2">
@@ -194,10 +319,10 @@ include("check.php");
                                                             <label class="custom-control-label" for="save-info">Diarrhea</label>
                                                         </div>
                                                     </div>
-                                                <hr class="mb-4">
+                                                <hr class="mb-4">-->
 
                                                 <!-- Comorbidities -->
-                                                <hr class="mb-4">
+                                                <!-- <hr class="mb-4">
                                                 <h4 class="mb-3">Comorbidities</h4>
                                                 <div class="custom-control custom-checkbox mb-2">
                                                     <input type="checkbox" class="custom-control-input" id="">
@@ -239,10 +364,10 @@ include("check.php");
                                                     <input type="checkbox" class="custom-control-input" id="">
                                                     <label class="custom-control-label" for="save-info">Down syndrome</label>
                                                 </div>
-                                                <hr class="mb-4">
+                                                <hr class="mb-4"> -->
 
                                                 <!-- Testing -->
-                                                <hr class="mb-4">
+                                                <!-- <hr class="mb-4">
                                                 <h4 class="mb-3">Testing</h4>
                                                 <div class="row">
                                                     <div class="col-md-5 mb-3">
@@ -252,44 +377,44 @@ include("check.php");
                                                             <option>Positive</option>
                                                             <option>Negative</option>
                                                         </select>
-                                                        <!-- <div class="invalid-feedback">
+                                                         <div class="invalid-feedback">
                                                             Please select a valid choice.
-                                                        </div> -->
+                                                        </div> 
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                </div>-->
+                                                <!-- <div class="row">
                                                     <div class="col-md-5 mb-3">
                                                         <label for="country">Quick Test</label>
                                                         <select class="d-block w-100 default-select" id="quick_test" required="">
                                                             <option value="">Choose...</option>
                                                             <option>Positive</option>
                                                             <option>Negative</option>
-                                                        </select>
+                                                        </select> -->
                                                         <!-- <div class="invalid-feedback">
                                                             Please select a valid choice.
                                                         </div> -->
-                                                    </div>
+                                                    <!-- </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3 mb-3">
                                                         <label for="cc-expiration">SPO2</label>
                                                         <input type="text" class="form-control" id="sp02" placeholder="" required="">
-                                                        <!-- <div class="invalid-feedback">
+                                                        <div class="invalid-feedback">
                                                             Percent saturation of oxygen in the blood required
-                                                        </div> -->
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3 mb-3">
                                                         <label for="cc-expiration">Respiratory rate</label>
                                                         <input type="text" class="form-control" id="res_rate" placeholder="" required="">
-                                                        <!-- <div class="invalid-feedback">
+                                                        <div class="invalid-feedback">
                                                             Breaths per minute required
-                                                        </div> -->
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <hr class="mb-4">
-                                                <button class="btn btn-primary btn-lg btn-block" type="button" value="submit" onclick="check()">Save</button>
+                                                <button class="btn btn-primary btn-lg btn-block" type="submit" name = "patient_id" value = "<?php echo $patient_id ?>" onclick="check()">Save</button>
                                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Print</button>
                                             </table>
                                             
@@ -347,7 +472,14 @@ include("check.php");
     <!-- Circle progress -->
 
 
-
+<?php 
+                                       
+                                    }
+                                                            }else {
+                                                                echo "no patient";
+                                                            }
+                                    }
+?>
 </body>
 
 </html>

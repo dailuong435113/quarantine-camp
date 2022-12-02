@@ -12,7 +12,7 @@
                 <li> <a href="declaration.php"> DECLARATION </a></li>
                 <li> <a href="search-test.php"> SEARCH </a></li>
                 <li> <a href="about.php"> ABOUT </a></li>
-                <li> <a href="contact.php"> CONTACT </a></li>
+                <li> <a href="admin_area/login.php"> LOGIN </a></li>
             </ul>
             <!-- <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 

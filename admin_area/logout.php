@@ -4,6 +4,6 @@ session_start();
 
 session_destroy();
 
-echo "<script>window.open('login.php','_self')</script>";
+echo "<script>window.open('http://localhost/B01-3/admin_area/login.php','_self')</script>";
 
 ?>

@@ -1,11 +1,7 @@
 <?php
-
-session_start();
-
 include("includes/db.php");
 include("includes/header.php");
-include("fucntion.php");
-
+//include("fucntion.php");
 ?>
 
 <br><br><br><br>
@@ -72,6 +68,7 @@ include("fucntion.php");
 
 </html>
 <?php
+
 if(isset($_POST['admin_login'])){
     $admin_email = mysqli_real_escape_string($conn,$_POST['people_id']);
                 
@@ -85,17 +82,17 @@ if(isset($_POST['admin_login'])){
     
     $row_employee = mysqli_fetch_array($run_admin);
     if($count==1){
-    
+        session_start();
     $_SESSION['admin_email']=$row_employee['people_in_camp_fname']." ".$row_employee['people_in_camp_lname'];
     
     echo "<script>alert('You are Logged in into admin panel')</script>";
     echo "<script>window.open('index.php','_self')</script>";
     //header("location: index.php");
-    
     }
-    // else {
-    // echo "<script>alert('Email or Password is Wrong')</script>";
-    // //header("location: page-login.php");
-    // }   
+    else {
+    echo "<script>alert('Email or Password is Wrong')</script>";
+    echo "<script>window.open('page-login.php','_self')</script>";
+    //header("location: page-login.php");
+    }   
 }
 ?>

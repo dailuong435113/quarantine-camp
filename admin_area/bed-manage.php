@@ -79,12 +79,13 @@ include("includes/header.php");
 			<div class="container-fluid">
 				<div class="form-head d-flex mb-sm-4 mb-3">
 					<div class="mr-auto">
-						<h2 class="text-black font-w600">Bed</h2>
-						<p class="mb-0">Bed Management</p>
+						<h2 class="text-black font-w600">Room</h2>
+						<p class="mb-0">Room Management</p>
 					</div>
 					<div>
-						<a href="javascript:void(0)" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addOrderModal">+New Bed</a>
-						<a href="index.html" class="btn btn-outline-primary"><i class="las la-calendar-plus scale5 mr-3"></i>Filter Date</a>
+						<a href="javascript:void(0)" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addOrderModal">+Room</a>
+						<a href="javascript:void(0)" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addOrderModal">+Floor</a>
+						<a href="javascript:void(0)" class="btn btn-primary mr-3" data-toggle="modal" data-target="#addOrderModal">+buiding</a>
 					</div>
 				</div>
 				<!-- Add Order -->
@@ -128,8 +129,9 @@ include("includes/header.php");
 								</form>
 							</div>
 						</div>
-					</div>
+					</div>			
 				</div>
+
 				<div class="row">
 					<div class="col-12">
 						<div class="table-responsive card-table">

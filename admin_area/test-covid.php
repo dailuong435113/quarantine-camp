@@ -96,38 +96,38 @@ include("includes/header.php");
 								</button>
 							</div>
 							<div class="modal-body">
-								<form>
-									<div class="form-group">
+								<form action = "add_test.php" method = "get">
+									<!-- <div class="form-group">
 										<label class="text-black font-w500">Test ID</label>
 										<input type="number" class="form-control">
-									</div>
+									</div> -->
 									<div class="form-group">
 										<label class="text-black font-w500">Patient ID</label>
-										<input type="number" class="form-control">
+										<input type="number" name="patient_id" class="form-control">
 									</div>
 									<div class="form-group">
-										<label class="text-black font-w500">People ID</label>
-										<input type="number" class="form-control">
+										<label class="text-black font-w500">Employee ID</label>
+										<input type="number" name="people_id" class="form-control">
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">Test Date</label>
-										<input type="date" class="form-control">
+										<input type="datetime-local" name="date" class="form-control">
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label class="text-black font-w500">Status</label>
 										<input type="text" class="form-control">
-									</div>
+									</div> -->
 									<div class="form-group">
-										<label class="text-black font-w500">PCR Test</label>
-											<select class="d-block w-100 default-select" id="gender" required="">
+										<label class="text-black font-w500">Testing type</label>
+											<select class="d-block w-100 default-select" id="gender" name = "testing_type" required="">
                                                 <option value="">Choose...</option>
-                                                <option>Positive</option>
-                                                <option>Negative</option>
+                                                <option value ="pcr">PCR Test</option>
+                                                <option value ="quick" >Quick Test</option>
                                             </select>
 									</div>
 									<div class="form-group">
-										<label class="text-black font-w500">Quick Test</label>
-											<select class="d-block w-100 default-select" id="gender" required="">
+										<label class="text-black font-w500">Result</label>
+											<select class="d-block w-100 default-select" name="result" id="gender" required="">
                                                 <option value="">Choose...</option>
                                                 <option>Positive</option>
                                                 <option>Negative</option>
@@ -135,14 +135,15 @@ include("includes/header.php");
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">SP02</label>
-										<input type="number" class="form-control" placeholder="%">
+										<input type="number" class="form-control" name="spo2" placeholder="%">
 									</div>
 									<div class="form-group">
 										<label class="text-black font-w500">Respiratory Rate</label>
-										<input type="number" class="form-control" placeholder="bpm">
+										<input type="number" class="form-control" name="respiratory_rate" placeholder="bpm">
 									</div>
 									<div class="form-group">
-										<button type="button" class="btn btn-primary">CREATE</button>
+										<!-- <input type="submit" class="btn btn-primary" name = "addtest" value = "create"> -->
+										<button type="submit" class="btn btn-primary" name="add_test">CREATE</button>
 									</div>
 								</form>
 							</div>
@@ -173,12 +174,20 @@ include("includes/header.php");
 										<th></th>
 									</tr>
 								</thead>
-								<?php $sql = "SELECT * FROM `test` 
+								<?php
+								if (!isset($_GET['people_id'])) {
+									$sql = "SELECT * FROM `test` 
 												INNER JOIN `test_covid` ON test.test_id = test_covid.test_id 
 												INNER JOIN `people_in_camp` ON test.employee_id = people_in_camp.people_in_camp_id 
 												INNER JOIN `patient` ON test.patient_id = patient.patient_id;";
-									$result = mysqli_query($conn, $sql);
-																			
+								}else {
+									$sql = "SELECT * FROM `test` 
+												INNER JOIN `test_covid` ON test.test_id = test_covid.test_id 
+												INNER JOIN `people_in_camp` ON test.employee_id = people_in_camp.people_in_camp_id 
+												INNER JOIN `patient` ON test.patient_id = patient.patient_id
+												WHERE test.patient_id = ".$_GET['people_id'].";";
+									}			
+									$result = mysqli_query($conn, $sql);								
 									if (mysqli_num_rows($result) > 0) {
 									// output data of each row
 									while($row = mysqli_fetch_assoc($result)) { 
@@ -217,13 +226,13 @@ include("includes/header.php");
 										<?php switch ($row['result']) {
 											case 'Positive':
 												?>
-												<td><span class="badge light badge-success"><?php  echo $row['result'];?></span></td>
+												<td><span class="badge light badge-danger"><?php  echo $row['result'];?></span></td>
 												<?php
 												break;
 
 											case 'Negative':
 												?>
-												<td><span class="badge light badge-danger"><?php  echo $row['result'];?></span></td>
+												<td><span class="badge light badge-success"><?php  echo $row['result'];?></span></td>
 												<?php
 												break;
 											
